@@ -6,8 +6,15 @@ if [[ -z "${1}" ]]; then
   exit 1
 fi
 
+if [[ ! -d "${TF_DIR}" ]]; then
+  echo "TF Directory not found for the cluster" >&2
+  exit 1
+fi
+
 #export variables like project name, region and tf_state
 source ../common.sh
+
+cd $TF_DIR
 
 ./tfw init -backend-config="project=${PROJECT}" -backend-config="path=${TF_STATE_PATH}"
 if [[ $1 == 'plan' ]]; then
