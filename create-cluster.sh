@@ -6,18 +6,18 @@ if [[ -z "${1}" ]]; then
   exit 1
 fi
 
+#export variables like project name, region and tf files
+source ../common.sh
+
 if [[ ! -d "${TF_DIR}" ]]; then
   echo "TF Directory not found for the cluster" >&2
   exit 1
 fi
 
-#export variables like project name, region and tf_state
-source ../common.sh
+cd $TF_DIR
 
 #check terraform is installed or not
 command -v terraform >/dev/null 2>&1 || { echo >&2 "Terraform is required but it's not installed.  Aborting."; exit 1; }
-
-cd $TF_DIR
 
 terraform init -backend-config="project=${PROJECT}" -backend-config="path=${TF_STATE_PATH}"
 if [[ $1 == 'plan' ]]; then
