@@ -21,7 +21,7 @@ command -v terraform >/dev/null 2>&1 || { echo >&2 "Terraform is required but it
 
 terraform init -backend-config="project=${PROJECT}" -backend-config="path=${TF_STATE_PATH}"
 if [[ $1 == 'plan' ]]; then
-  terraform plan -var="project=${PROJECT}" -var="region=${REGION}" -var="zone=${ZONE}" -out=cluster.tfplan
+  terraform plan -var="project=${PROJECT}" -var="region=${REGION}" -var="zone=${ZONE}" -var="name=${NAME}" -out=cluster.tfplan
 elif [[ $1 == 'apply' ]]; then
   terraform apply cluster.tfplan
 fi
