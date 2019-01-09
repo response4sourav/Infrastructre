@@ -1,13 +1,13 @@
 provider "google" {
  credentials = "${file("../../gocd-credentials.json")}"
- project     = "${var.project}"
- region      = "${var.region}"
- zone        = "${var.zone}"
+ project     = "${project}"
+ region      = "${region}"
+ zone        = "${zone}"
  version     = "~> 1.19.0"
 }
 resource "google_container_cluster" "cluster" {
- name               = "${var.name}"
- zone               = "${var.zone}"
+ name               = "${name}"
+ zone               = "${zone}"
  network             = "default"
  subnetwork          = "default"
  monitoring_service  = "monitoring.googleapis.com"
