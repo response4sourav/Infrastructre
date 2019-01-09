@@ -14,11 +14,14 @@ fi
 #export variables like project name, region and tf_state
 source ../common.sh
 
+#check terraform is installed or not
+command -v terraform >/dev/null 2>&1 || { echo >&2 "Terraform is required but it's not installed.  Aborting."; exit 1; }
+
 cd $TF_DIR
 
-./tfw init -backend-config="project=${PROJECT}" -backend-config="path=${TF_STATE_PATH}"
+terraform init -backend-config="project=${PROJECT}" -backend-config="path=${TF_STATE_PATH}"
 if [[ $1 == 'plan' ]]; then
-  ./tfw plan -var="project=${PROJECT}" -var="region=${REGION}" -out=cluster.tfplan
+  terraform plan -var="project=${PROJECT}" -var="region=${REGION}" -out=cluster.tfplan
 elif [[ $1 == 'apply' ]]; then
-  ./tfw apply cluster.tfplan
+  terraform apply cluster.tfplan
 fi
