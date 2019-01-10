@@ -15,11 +15,12 @@ function activate_gcloud_service_account() {
    # exit 1
   #fi
 
-  ORIGINAL_KUBE_CONTEXT=$(kubectl config current-context)
-  
+   
   GOOGLE_CREDENTIAL_FILE = "../gocd-credentials.json"
   
   gcloud auth activate-service-account --key-file=$GOOGLE_CREDENTIAL_FILE
+  
+  ORIGINAL_KUBE_CONTEXT=$(kubectl config current-context)
   
   add_exit_trap "gcloud auth revoke; kubectl config use-context ${ORIGINAL_KUBE_CONTEXT}"
 
