@@ -16,9 +16,7 @@ function activate_gcloud_service_account() {
   #fi
 
    
-  GOOGLE_CREDENTIAL_FILE = "../gocd-credentials.json"
-  
-  gcloud auth activate-service-account --key-file=$GOOGLE_CREDENTIAL_FILE
+  gcloud auth activate-service-account --key-file="../gocd-credentials.json"
   
   ORIGINAL_KUBE_CONTEXT=$(kubectl config current-context)
   
