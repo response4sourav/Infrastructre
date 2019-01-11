@@ -13,15 +13,10 @@ function activate_gcloud_service_account() {
    # echo "Could not determine zone for cluster ${NAME} in project ${PROJECT}" >&2
    # exit 1
   #fi
-
-   
+  
   gcloud auth activate-service-account --key-file="../gocd-credentials.json"
   
   gcloud container clusters get-credentials ${NAME} --project=${PROJECT} --zone=${ZONE}  
-  
-  ORIGINAL_KUBE_CONTEXT=$(kubectl config current-context)
-  
-  add_exit_trap "gcloud auth revoke; kubectl config use-context ${ORIGINAL_KUBE_CONTEXT}"
 
 }
 
