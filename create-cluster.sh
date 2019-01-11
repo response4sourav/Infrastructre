@@ -17,14 +17,14 @@ if [[ ! -d "${TF_DIR}" ]]; then
   exit 1
 fi
 
-cd $TF_DIR
-
 #check terraform is installed or not
 command -v terraform >/dev/null 2>&1 || { echo >&2 "Terraform is required but it's not installed.  Aborting."; exit 1; }
 
 activate_gcloud_service_account
 
 create-tfstate-bucket || true
+
+cd $TF_DIR
 
 terraform init -backend-config="project=${PROJECT}" -backend-config="bucket=${BUCKET_NAME}" -backend-config="path=${TF_STATE_PATH}"
 if [[ $1 == 'plan' ]]; then
