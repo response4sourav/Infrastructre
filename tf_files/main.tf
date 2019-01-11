@@ -6,15 +6,6 @@ provider "google" {
  version     = "~> 1.19.0"
 }
 
-resource "google_storage_bucket_iam_binding" "binding" {
-  bucket = "${var.project}-tf-state"
-  role        = "roles/storage.objectAdmin"
-
-  members = [
-    "user:sourav-gocd@${var.project}.iam.gserviceaccount.com",
-  ]
-}
-
 resource "google_container_cluster" "cluster" {
  name                = "${var.name}"
  zone                = "${var.zone}"
