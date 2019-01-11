@@ -20,7 +20,7 @@ fi
 #check terraform is installed or not
 command -v terraform >/dev/null 2>&1 || { echo >&2 "Terraform is required but it's not installed.  Aborting."; exit 1; }
 
-activate_gcloud_service_account
+gcloud auth activate-service-account --key-file="../gocd-credentials.json"
 
 create-tfstate-bucket || true
 
