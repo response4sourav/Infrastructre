@@ -21,6 +21,7 @@ fi
 command -v terraform >/dev/null 2>&1 || { echo >&2 "Terraform is required but it's not installed.  Aborting."; exit 1; }
 
 gcloud auth activate-service-account --key-file="../gocd-credentials.json"
+gcloud container get-credentials ${NAME} --project=${PROJECT} --zone=${ZONE}
 
 create-tfstate-bucket || true
 
