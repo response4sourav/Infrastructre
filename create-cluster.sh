@@ -26,7 +26,7 @@ create-tfstate-bucket || true
 
 cd $TF_DIR
 
-GOOGLE_CREDENTIALS = "${file('../../gocd-credentials.json')}"
+GOOGLE_CREDENTIALS = "file('../../gocd-credentials.json')"
 terraform init -backend-config="credentials=${GOOGLE_CREDENTIALS}" -backend-config="project=${PROJECT}" -backend-config="bucket=${BUCKET_NAME}" -backend-config="prefix=${TF_STATE_PATH}"
 if [[ $1 == 'plan' ]]; then
   terraform plan -var="project=${PROJECT}" -var="region=${REGION}" -var="zone=${ZONE}" -var="name=${NAME}" -out=cluster.tfplan
