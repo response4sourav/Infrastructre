@@ -21,12 +21,11 @@ fi
 command -v terraform >/dev/null 2>&1 || { echo >&2 "Terraform is required but it's not installed.  Aborting."; exit 1; }
 
 gcloud auth activate-service-account --key-file="../gocd-credentials.json"
-export GOOGLE_APPLICATION_CREDENTIALS="../gocd-credentials.json"
 
 create-tfstate-bucket || true
 
 cd $TF_DIR
-
+export GOOGLE_APPLICATION_CREDENTIALS="../../gocd-credentials.json"
 terraform init -backend-config="project=${PROJECT}" -backend-config="bucket=${BUCKET_NAME}" -backend-config="prefix=${TF_STATE_PATH}"
  
 if [[ $1 == 'plan' ]]; then
