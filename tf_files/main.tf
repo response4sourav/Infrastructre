@@ -5,6 +5,10 @@ provider "google" {
  zone        = "${var.zone}"
  version     = "~> 1.19.0"
 }
+resource google_storage_bucket tf-state {
+  name     = "${var.project}-tf-state"
+  location = "US"
+}
 resource "google_container_cluster" "cluster" {
  name                = "${var.name}"
  zone                = "${var.zone}"
