@@ -42,7 +42,7 @@ function add_exit_trap() {
 
 function create-tfstate-bucket() {
   echo "Ensuring bucket ${BUCKET_NAME} exists"
-  gsutil mb -c multi_regional -l eu -p ${PROJECT} gs://${BUCKET_NAME}
+  gsutil mb -c multi_regional -l us -p ${PROJECT} gs://${BUCKET_NAME}
   gsutil versioning set on gs://${BUCKET_NAME}
 }
 
