@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source ../common.sh
+source common.sh
 
 source utils.sh
 

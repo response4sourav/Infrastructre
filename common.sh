@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+export REGION=us-east1
+export ZONE=us-east1-b
+export PROJECT=woven-framework-218313
+export NAME=ss-cluster
+export TF_STATE_PATH=tf_state
+export TF_DIR=tf_files
+export NAMESPACE=sourav
+export BUCKET_NAME=${PROJECT}-tf-state

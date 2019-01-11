@@ -5,7 +5,6 @@ if [ "$0" = "$BASH_SOURCE" ]; then
   exit 1
 fi
 
-
 function activate_gcloud_service_account() {
 
   # get_valid_zone_for_cluster... not required as we are passing it as ENV VARS
@@ -26,7 +25,6 @@ function activate_gcloud_service_account() {
 
 }
 
-
 # Set a trap on EXIT without overwriting any existing traps
 function add_exit_trap() {
   existing_trap_delimited=$(trap -p EXIT)
@@ -45,4 +43,14 @@ function add_exit_trap() {
       trap "${existing_trap}; $1" EXIT
     fi
   fi
+}
+
+function create-tfstate-bucket() {
+  echo "Ensuring bucket ${BUCKET_NAME} exists"
+  gsutil mb -c multi_regional -l eu -p ${PROJECT} gs://${BUCKET_NAME}
+  gsutil versioning set on gs://${BUCKET_NAME}
+}
+
+function delete-tfstate-bucket() {
+  gsutil rm -r gs://${BUCKET_NAME}/${TF_STATE_PATH}
 }
