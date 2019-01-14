@@ -2,7 +2,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: react-app
+  name: react-app-nlb
   namespace: ${NAMESPACE}
   labels:
     area: react
@@ -11,8 +11,9 @@ spec:
   selector:
     area: react
     tier: app
+  type: LoadBalancer
   ports:
-  - port: 8080
+  - port: 80
     targetPort: 8080
 
 ---
